@@ -1,4 +1,7 @@
+
+
 .friend {
+  min-height: 345px;
   .search-container{
     display: flex;
     justify-content: space-between;
@@ -36,7 +39,7 @@
         }
         &.delete {
             .material-icons{
-            color: #f58989;
+            color: #ef5350;
             }
         }
         &.fav {
@@ -54,14 +57,17 @@
   list-style: none;
   display: flex;
   justify-content: center;
+  align-items: center;
   li {
     margin-right: 0.3em;
-    color: blue;
     border-radius: 50%;
     font-size: 18px;
     -webkit-user-select: none;
     user-select: none;
     cursor: pointer;
    padding:5px;
+   &.active{
+     color:blue;
+   }
   }
 }

@@ -1,0 +1,15 @@
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+.page-link{
+    border:none;
+    &.active{
+        background-color: #2196f3;
+    }
+    .page-item{
+
+    }
+}
+
+}
