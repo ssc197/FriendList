@@ -3,7 +3,7 @@ import FriendList from "../FriendList";
 import AddFriend from "../AddFriend";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
-
+import Modal from "../../components/Modal";
 
 import axios from "axios";
 const Friend = () => {
@@ -15,7 +15,8 @@ const BASE_URL = "/api/friends";
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [loader, showLoader, hideLoader] = Loader();
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
+  const [friendId, setFriendId] = useState(""); 
   const [isloaded, setIsLoaded] = useState(false);
   const ITEMS_PER_PAGE = 4;
   useEffect(() => {
@@ -70,14 +71,12 @@ const BASE_URL = "/api/friends";
       .then(({ data }) => getData())
       .catch(console.error)
       .finally();
-    console.log(data);
-  };
+   };
 
-  const deleteFriend = (id) => {
-    console.log(id)
+  const deleteFriend = () => {
     axios
-      .post(`${BASE_URL}/delete/${id}`)
-      .then(({ res }) => getData())
+      .post(`${BASE_URL}/delete/${friendId}`)
+      .then(({ res }) => {setIsVisible(false);getData()})
       .catch(console.error)
       .finally();
     // setData([...data, friend]);
@@ -88,8 +87,7 @@ const BASE_URL = "/api/friends";
   };
 
   const addToFav = (data) => {
-    console.log(data)
-    let isFav = null;
+     let isFav = null;
     if (data.isFav) {
       isFav = false;
     } else {
@@ -126,6 +124,8 @@ const BASE_URL = "/api/friends";
             addToFav={addToFav}
             deleteFriend={deleteFriend}
             searchFriend={searchFriend}
+            setIsVisible = {setIsVisible}
+            setFriendId = {setFriendId}
           />
           <Pagination
             total={totalItems}
@@ -133,6 +133,7 @@ const BASE_URL = "/api/friends";
             currentPage={currentPage}
             onPageChange={(page) => setCurrentPage(page)}
           />
+      <Modal isVisible={isVisible} setIsVisible={setIsVisible} onSuccessHandler={() => deleteFriend()} />
         </div>
       ) : (
         ""

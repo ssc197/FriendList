@@ -1,12 +1,12 @@
 import { useState,useEffect} from "react";
 import "./style.scss";
  
-const FriendList = ({ data, addToFav, deleteFriend ,searchFriend}) => {
+const FriendList = ({ data, addToFav, deleteFriend ,searchFriend, setIsVisible, setFriendId}) => {
 
   // console.log('frist',data)
   const [filterData, setFilterData] = useState([])
   const [search, setSearch] = useState("")
- 
+  
   useEffect(() => {
     setFilterData(data)
   }, [data]);
@@ -21,7 +21,7 @@ const FriendList = ({ data, addToFav, deleteFriend ,searchFriend}) => {
   filterData &&
   filterData.map((friend) => {
       return (
-        <div className="list" key={friend.id}>
+        <div className="list" key={friend._id}>
           <div className="leftBox">
             <div className="name">{friend.name}</div>
             <div className="desc">is your friend</div>
@@ -32,10 +32,9 @@ const FriendList = ({ data, addToFav, deleteFriend ,searchFriend}) => {
                 star
               </i>
             </span>
-            <span className="delete icon-container"  onClick={() => deleteFriend(friend._id)  }>
+            <span className="delete icon-container"  onClick={() => {setFriendId(friend._id) ;setIsVisible(true)} }>
               <i
                 className="material-icons"
-               
               >
                 delete
               </i>

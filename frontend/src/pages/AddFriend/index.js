@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./style.scss";
 
 const AddFriend = (props) => {
   const [formData, setformData] = useState({
     name: "",
   });
+  const [isnameEmpty, setIsNameEmpty]= useState(true);
 
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value });
@@ -12,9 +13,16 @@ const AddFriend = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addFriend(formData);
-    // console.log(formData);
+    if(formData.name){
+      props.addFriend(formData);
+    }else{
+      setIsNameEmpty(false);
+    }
     document.getElementById("addForm").reset();
+    setformData({name:""})
+    setTimeout(() => {
+      setIsNameEmpty(true);
+    }, 1000);
 
     // this.props.addNinja(formData);
   };
@@ -25,7 +33,7 @@ const AddFriend = (props) => {
         <div className="input-field">
           <input type="text" id="name" onChange={handleChange} />
           <label htmlFor="name">Enter your friend's name:</label>
-
+          {!isnameEmpty?(<span className="red-text">Please enter Friends name</span>):("")}
         </div>
       </form>
     </div>

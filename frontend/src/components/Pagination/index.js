@@ -31,7 +31,7 @@ const Pagination = ({
     }
     return pages;
   }, [totalPages, currentPage, onPageChange]);
-
+  if (totalPages === 0) return null;
   return (
     <>
       {total > itemsPerPage ? (

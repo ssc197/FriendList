@@ -1,12 +1,16 @@
 const { Friends } = require("../../helper/db");
+const validateFriends = require("./friends.validation");
 
 const express = require("express");
 const router = express.Router();
 
 var self = (module.exports = {
   add: (req, res) => {
+    const { errors, isValid } = validateFriends(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
     const _friends = new Friends(req.body);
-
     _friends.save().then((data) => {
       return res.status(200).json({ message: "SuccessFully Added" });
     });
