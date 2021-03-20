@@ -4,9 +4,10 @@ import AddFriend from "../AddFriend";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 
+
 import axios from "axios";
 const Friend = () => {
-  const BASE_URL = "https://60549bf8d4d9dc001726d8b1.mockapi.io/api/friends";
+const BASE_URL = "/api/friends";
 
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -14,6 +15,7 @@ const Friend = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [loader, showLoader, hideLoader] = Loader();
+  const [isVisible, setIsVisible] = useState(false)
   const [isloaded, setIsLoaded] = useState(false);
   const ITEMS_PER_PAGE = 4;
   useEffect(() => {
@@ -28,7 +30,6 @@ const Friend = () => {
       .then(({ data }) => {
         setIsLoaded(true);
         hideLoader();
-        
         data.sort(function (x, y) {
           return x.isFav === y.isFav ? 0 : x.isFav ? -1 : 1;
         });
@@ -65,7 +66,7 @@ const Friend = () => {
   const addFriend = (friend) => {
     let name = friend.name;
     axios
-      .post(`${BASE_URL}`, { name })
+      .post(`${BASE_URL}/add`, { name })
       .then(({ data }) => getData())
       .catch(console.error)
       .finally();
@@ -73,8 +74,9 @@ const Friend = () => {
   };
 
   const deleteFriend = (id) => {
+    console.log(id)
     axios
-      .delete(`${BASE_URL}/${id}`)
+      .post(`${BASE_URL}/delete/${id}`)
       .then(({ res }) => getData())
       .catch(console.error)
       .finally();
@@ -86,6 +88,7 @@ const Friend = () => {
   };
 
   const addToFav = (data) => {
+    console.log(data)
     let isFav = null;
     if (data.isFav) {
       isFav = false;
@@ -93,13 +96,12 @@ const Friend = () => {
       isFav = true;
     }
     axios
-      .put(`${BASE_URL}/${data.id}`, { isFav })
+      .post(`${BASE_URL}/update/${data._id}`, { isFav })
       .then(({ res }) => getData())
       .catch(console.error)
       .finally();
     // setData([...data, friend]);
-    console.log(data);
-
+ 
     // let index = data.findIndex(x=> x.id === data.id);
     // if(index !==-1){
     //     if(data[index].isFav){

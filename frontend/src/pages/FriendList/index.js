@@ -1,11 +1,12 @@
-import React, { useState,useEffect} from "react";
+import { useState,useEffect} from "react";
 import "./style.scss";
+ 
 const FriendList = ({ data, addToFav, deleteFriend ,searchFriend}) => {
 
   // console.log('frist',data)
   const [filterData, setFilterData] = useState([])
   const [search, setSearch] = useState("")
-
+ 
   useEffect(() => {
     setFilterData(data)
   }, [data]);
@@ -31,7 +32,7 @@ const FriendList = ({ data, addToFav, deleteFriend ,searchFriend}) => {
                 star
               </i>
             </span>
-            <span className="delete icon-container"  onClick={() => deleteFriend(friend.id)}>
+            <span className="delete icon-container"  onClick={() => deleteFriend(friend._id)  }>
               <i
                 className="material-icons"
                
@@ -57,6 +58,7 @@ const FriendList = ({ data, addToFav, deleteFriend ,searchFriend}) => {
       </div>
       
       {_friendsList}
+ 
      </div>
   );
 };
