@@ -27,12 +27,12 @@ const FriendList = ({ data, addToFav, deleteFriend ,searchFriend, setIsVisible, 
             <div className="desc">is your friend</div>
           </div>
           <div className="rightBox">
-            <span className={`${friend.isFav ? "fav" : ""} icon-container`} onClick={() => addToFav(friend)}>
+            <span className={`${friend.isFav ? "fav" : ""} icon-container waves-effect`} onClick={() => addToFav(friend)}>
               <i className="material-icons" >
                 star
               </i>
             </span>
-            <span className="delete icon-container"  onClick={() => {setFriendId(friend._id) ;setIsVisible(true)} }>
+            <span className="delete icon-container waves-effect"  onClick={() => {setFriendId(friend._id) ;setIsVisible(true)} }>
               <i
                 className="material-icons"
               >
