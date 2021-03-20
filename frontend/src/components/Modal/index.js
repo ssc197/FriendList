@@ -9,10 +9,10 @@ const Modal = (props) => {
           <div className='body'>
             <h3>Are you sure about deleting this friend?</h3>
             <div className='actions'>
-              <button className='close' onClick={() => setIsVisible(!isVisible)}>
+              <button className='close waves-effect' onClick={() => setIsVisible(!isVisible)}>
                 Close
               </button>
-              <button className='success' onClick={onSuccessHandler}>
+              <button className='success waves-effect' onClick={onSuccessHandler}>
                 Yes
               </button>
             </div>
