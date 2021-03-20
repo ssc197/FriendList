@@ -34,6 +34,7 @@ const BASE_URL = "/api/friends";
         data.sort(function (x, y) {
           return x.isFav === y.isFav ? 0 : x.isFav ? -1 : 1;
         });
+        console.log(data)
         setData(data);
       })
       .catch(console.error)
@@ -56,13 +57,15 @@ const BASE_URL = "/api/friends";
     }
 
     setTotalItems(computedData.length);
-
-    // Current pge slice
+    let totalPages = Math.ceil(computedData.length / ITEMS_PER_PAGE);
+    if(totalItems > 1 && currentPage > totalPages){
+      setCurrentPage(totalPages)
+    }
     return computedData.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     );
-  }, [data, currentPage, search]);
+  }, [data, currentPage, search,totalItems]);
 
   const addFriend = (friend) => {
     let name = friend.name;
@@ -79,11 +82,6 @@ const BASE_URL = "/api/friends";
       .then(({ res }) => {setIsVisible(false);getData()})
       .catch(console.error)
       .finally();
-    // setData([...data, friend]);
-    // let friend = data.filter((friend) => {
-    //   return friend.id !== id;
-    // });
-    // setData(friend);
   };
 
   const addToFav = (data) => {
@@ -98,19 +96,6 @@ const BASE_URL = "/api/friends";
       .then(({ res }) => getData())
       .catch(console.error)
       .finally();
-    // setData([...data, friend]);
- 
-    // let index = data.findIndex(x=> x.id === data.id);
-    // if(index !==-1){
-    //     if(data[index].isFav){
-    //         data[index].isFav=false
-    //         data[index].isFav=true;
-    //     }
-    //     data.sort(function(x, y) {
-    //         return (x.isFav === y.isFav)? 0 : x.isFav? -1 : 1;
-    //     });
-    //     setData([...data]);
-    // }
   };
 
   return (

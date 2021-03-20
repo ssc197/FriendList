@@ -12,6 +12,15 @@
     .input-field.col{
       left:0;
     }
+    h5{
+      display: flex;
+      justify-content: center;
+      font-size: 18px;
+      word-spacing: 0px;
+      white-space: nowrap;
+      margin-left: -10px;
+      align-items: center;
+    }
   }
   .list {
     border: 1px solid #e0e0e0;
@@ -60,21 +69,3 @@
 }
 
 
-.page-numbers{
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  li {
-    margin-right: 0.3em;
-    border-radius: 50%;
-    font-size: 18px;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: pointer;
-   padding:5px;
-   &.active{
-     color:blue;
-   }
-  }
-}
