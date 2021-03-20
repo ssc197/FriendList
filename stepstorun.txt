@@ -1,0 +1,7 @@
+UI :
+1. cd frontend
+2. npm start
+
+API: 
+1. cd api
+2. nodemon
